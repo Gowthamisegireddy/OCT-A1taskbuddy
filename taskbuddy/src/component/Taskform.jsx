@@ -1,10 +1,17 @@
 import React, { useState } from "react";
-export default function Taskform() {
+export default function Taskform({addTask}) {
     const[task,settask] = useState('');
     const[priority, setpriority] = useState('Medium');
     const[category, setcategory] = useState('General');
-    return (
-        <form>
+    const handleSumbit=(e)=>{
+        e.preventDefault();
+        addTask({text:task,priority,category,completed: false})
+        setpriority('Medium');
+        setcategory('General');
+        settask('');
+    }
+        return (
+        <form onSubmit={handleSumbit} className="task_form">
             <div  id= "inp">
             <input type ="text"
             value = {task}
@@ -24,7 +31,7 @@ export default function Taskform() {
                         <option value ="General">General</option>
                         <option value = "work">Work</option>
                         <option value = "personal">Personal</option>
-                        
+
                     </select>
 
             </div>
